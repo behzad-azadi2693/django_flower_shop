@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{%if LANGUAGE_CODE == 'en' %}
+
+  <div class="center_content">
+    <div class="left_content">
+      <div class="title"><span class="title_icon"><img src="{%static 'images/bullet1.gif' %}" alt="" /></span>My cart</div>
+      <div class="feat_prod_box_details">
+        <table class="cart_table">
+          <tr class="cart_title">
+            <td>Item pic</td>
+            <td>Product name</td>
+            <td>Unit price</td>
+            <td>Qty</td>
+            <td>Total</td>
+            <td>Delete</td>
+          </tr>
+          {% for pro in products %}
+          <tr>
+            <td><a href=""><img style="width: 50px; height: 50px;" src="{{pro.product.image.url}}" alt="" border="0" class="cart_thumb" /></a></td>
+            <td>{{pro.product.name}}</td>
+            <td>{{pro.product.price_end_doller}}doller</td>
+            <td>
+              <form action="{% url 'product:update_basket' %}" method="POST">
+                {% csrf_token %}
+                <input type="number" name="number" min="1" max="{{pro.product.count}}" value="{{pro.qty}}">
+                <input  type="number" name="pk" hidden readonly value="{{pro.pk}}">
+                <input type="submit" style="height: 22px;width: 40px;" class="register" value="آپدیت">
+              </form>
+            </td>
+            <td>{{pro.total_doller}}doller</td>
+            <td style="height: 20px;width: 20px;">
+              <form action="{% url 'product:delete_product' %}" method="POST">
+                {% csrf_token %}
+                <input  type="number" name="pk" hidden readonly value="{{pro.pk}}">
+                <input type="submit" class="register" style="height: 22px;width: 40px;"value="حذف">
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="4" class="cart_total"><span class="red">TOTAL SHIPPING:</span></td>
+            <td> {{total_doller}}$</td>
+          </tr>
+          
+        </table>
+        {% if basket %}
+          <a href="{% url 'product:remove_basket' %}" class="continue"> delete_basket</a> <a href="{% url 'product:address' basket_pk %}" class="checkout">pay basket </a>
+        {% endif %}  
+        </div>
+      <div class="clear"></div>
+      <hr>
+      <div class="title"><span class="title_icon"><img src="{% static 'images/bullet1.gif' %}" alt="" /></span>لیست سفارشات من</div>
+
+      {% for tb in  basket_old%}  
+      <div class="feat_prod_box_details">
+        <table class="cart_table">
+          <tr class="cart_title">
+            <td>image</td>
+            <td>product name</td>
+            <td>price unit</td>
+            <td>Qty</td>
+            <td>price total</td>
+          </tr>
+          {% for pro in tb.basketproduct_user.all %}
+          <tr>
+            <td><a href=""><img style="width: 50px; height: 50px;" src="{{pro.product.image.url}}" alt="" border="0" class="cart_thumb" /></a></td>
+            <td>{{pro.product.name}}</td>
+            <td>{{pro.price_unit_doller}}$</td>
+            <td>{{pro.qty}}</td>
+            <td>{{pro.total_doller_paid}}$</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="4" class="cart_total"><span class="red">مبلغ پرداخت شده:</span></td>
+            <td>{{tb.money_paid}}</td>
+          </tr>
+          <tr>
+            {% for addr in tb.basket_address.all %}
+
+            <td colspan="1" class="cart_total"><span class="red">{{addr.number}}</span></td>
+            <td colspan="4">{{ addr.address}}</td>
+            {% endfor %}
+
+          </tr>
+        </table>
+      </div>
+      <div class="clear"></div>
+        {% endfor %}
+    </div>
+{% endif %}
+{%if LANGUAGE_CODE == 'fa' %}
+ <div class="center_content">
+    <div class="left_content">
+      <div class="title"><span class="title_icon"><img src="{%static 'images/bullet1.gif' %}" alt="" /></span>My cart</div>
+      <div class="feat_prod_box_details">
+        <table class="cart_table">
+          <tr class="cart_title">
+            <td>Item pic</td>
+            <td>Product name</td>
+            <td>Unit price</td>
+            <td>Qty</td>
+            <td>Total</td>
+            <td>Delete</td>
+          </tr>
+          {% for pro in products %}
+          <tr>
+            <td><a href=""><img style="width: 50px; height: 50px;" src="{{pro.product.image.url}}" alt="" border="0" class="cart_thumb" /></a></td>
+            <td>{{pro.product.name}}</td>
+            <td>{{pro.unit_price_rial}}ریال</td>
+            <td>
+              <form action="{% url 'product:update_basket' %}" method="POST">
+                {% csrf_token %}
+                <input type="number" name="number" min="1" max="10" value="{{pro.qty}}">
+                <input  type="number" name="pk" hidden readonly value="{{pro.pk}}">
+                <input type="submit" style="height: 22px;width: 40px;" class="register" value="آپدیت">
+              </form>
+            </td>
+            <td>{{pro.total_rial}}doller</td>
+            <td style="height: 20px;width: 20px;">
+              <form action="{% url 'product:delete_product' %}" method="POST">
+                {% csrf_token %}
+                <input  type="number" name="pk" hidden readonly value="{{pro.pk}}">
+                <input type="submit" class="register" style="height: 22px;width: 40px;"value="حذف">
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="4" class="cart_total"><span class="red">TOTAL SHIPPING:</span></td>
+            <td> {{total_rial}}$</td>
+          </tr>
+          
+        </table>
+        {% if basket %}
+          <a href="{% url 'product:remove_basket' %}" class="continue"> delete_basket</a> <a href="{% url 'product:address' %}" class="checkout">pay basket </a> 
+        {% endif %}
+        </div>
+      <div class="clear"></div>
+      <hr>
+      <div class="title"><span class="title_icon"><img src="{% static 'images/bullet1.gif' %}" alt="" /></span>لیست سفارشات من</div>
+
+      {% for tb in  basket_old%}  
+      <div class="feat_prod_box_details">
+        <table class="cart_table">
+          <tr class="cart_title">
+            <td>تصویر</td>
+            <td>نام محصول</td>
+            <td>قیمت واحد</td>
+            <td>تعداد</td>
+            <td>قیمت کل</td>
+          </tr>
+          {% for pro in tb.basketproduct_user.all %}
+          <tr>
+            <td><a href=""><img style="width: 50px; height: 50px;" src="{{pro.product.image.url}}" alt="" border="0" class="cart_thumb" /></a></td>
+            <td>{{pro.product.name}}</td>
+            <td>{{pro.price_unit_rial}}ریال</td>
+            <td>{{pro.qty}}</td>
+            <td>{{pro.total_rial}}ریال</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="4" class="cart_total"><span class="red">مبلغ پرداخت شده:</span></td>
+            <td>{{tb.money_paid}}</td>
+          </tr>
+          <tr>
+            {% for addr in tb.basket_address.all %}
+
+            <td colspan="1" class="cart_total"><span class="red">{{addr.number}}</span></td>
+            <td colspan="4">{{ addr.address}}</td>
+            {% endfor %}
+
+          </tr>
+        </table>
+      </div>
+      <div class="clear"></div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

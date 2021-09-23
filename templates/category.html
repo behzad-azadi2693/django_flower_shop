@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{%if LANGUAGE_CODE == 'en' %}
+  <div class="center_content">
+    <div class="left_content">
+    <form action="{% url 'product:search' %}" method = 'GET'>
+          <input type="number" name="price_down" {% if price_down %}value="{{price_down}}"{% endif %}placeholder="(100000)کمتر از"> 
+          <input type="text" size="10" name="name"{% if name %}value="{{name}}"{% endif %} placeholder="نام محصول">
+          <p>
+            <input type="number" name="price_up" {% if price_up %}value="{{price_up}}"{% endif %} placeholder="(1000)بیشتر از"> 
+            <select name="category">
+              <option {% if category %}value="{{category}}"{% else %} value="" {% endif %}>{% if category %} {{category}} {% else %} --- {% endif %}</option>
+              {% for cat in categories %}
+                <option  value="{{cat.name_en}}">{{cat.name_en}}</option>
+              {% endfor %} 
+              </select>
+            <input type="submit" class="register" value="سرچ"> 
+          </p>
+    </form>
+      <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" /></span>all products</div>
+      <div class="new_products">
+       
+      {% for pro in products %}
+        <div class="new_prod_box"> <a href="{% url 'product:product_single' pro.slug %}">{{ pro.name_en }}</a>
+          <div class="new_prod_bg"> <span class="new_icon">
+          {% if pro.status == 'new' %}
+            <img src="{% static 'images/new_icon.gif' %}" alt="" />
+          {% endif %}
+          {% if pro.status == 'promo' %}
+            <img src="{% static 'images/promo_icon.gif' %}" alt="" />
+          {% endif %}
+          {% if pro.status == 'special' %}
+            <img src="{% static 'images/special_icon.gif' %}" alt="" />
+          {% endif %}
+          </span> <a href="{% url 'product:product_single' pro.slug %}"><img src="{{ pro.image.url }}" alt="" class="thumb" border="0" /></a> </div>
+        </div>
+      {% endfor %}
+
+
+      {% if searchs.has_other_pages %}
+        <div class="pagination">
+          {% if searchs.has_previous %}
+          <a href="?page={{searchs.previous_page_number}}"><<</a>
+          {% else %}
+          <span class="disabled"><<</span>
+          {% endif %}
+          {% for i in product.paginator.page_range %} 
+            {% if searchs.number == i %}
+            <a>{{i}}</a>
+            {% else %}
+              <a href="?page={{i}}">{{i}}</a>
+            {% endif %}
+          {% endfor %}
+          {% if searchs.has_next %}
+            <a href="?page={{searchs.next_page_number}}">>></a>
+          {% else %}
+          <span class="disabled">>></span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+
+    </div>
+    <div class="clear"></div>
+  </div>
+{% endif %}
+{%if LANGUAGE_CODE == 'fa' %}
+<div class="center_content">
+    <div class="left_content">
+      <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" /></span>all products</div>
+      <div class="new_products">
+       
+      {% for pro in products %}
+        <div class="new_prod_box"> <a href="{% url 'product:product_single' pro.slug %}">{{ pro.name_en }}</a>
+          <div class="new_prod_bg"> <span class="new_icon">
+          {% if pro.status == 'new' %}
+            <img src="{% static 'images/new_icon.gif' %}" alt="" />
+          {% endif %}
+          {% if pro.status == 'promo' %}
+            <img src="{% static 'images/promo_icon.gif' %}" alt="" />
+          {% endif %}
+          {% if pro.status == 'special' %}
+            <img src="{% static 'images/special_icon.gif' %}" alt="" />
+          {% endif %}
+          </span> <a href="{% url 'product:product_single' pro.slug %}"><img src="{{ pro.image.url }}" alt="" class="thumb" border="0" /></a> </div>
+        </div>
+      {% endfor %}
+
+
+      {% if searchs.has_other_pages %}
+        <div class="pagination">
+          {% if searchs.has_previous %}
+          <a href="?page={{searchs.previous_page_number}}"><<</a>
+          {% else %}
+          <span class="disabled"><<</span>
+          {% endif %}
+          {% for i in product.paginator.page_range %} 
+            {% if searchs.number == i %}
+            <a>{{i}}</a>
+            {% else %}
+              <a href="?page={{i}}">{{i}}</a>
+            {% endif %}
+          {% endfor %}
+          {% if searchs.has_next %}
+            <a href="?page={{searchs.next_page_number}}">>></a>
+          {% else %}
+          <span class="disabled">>></span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+
+    </div>
+    <div class="clear"></div>
+  </div>
+{% endif %}
+
+{% endblock %}

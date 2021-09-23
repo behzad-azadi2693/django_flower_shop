@@ -1,0 +1,52 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% url 'product:index' as index%}
+{% url 'product:about' as about%}
+{% url 'product:all_products' as all_products%}
+{% url 'product:product_special' as product_special%}
+{% url 'product:contact' as contact%}
+{% url 'accounts:signin' as signin%}
+{% url 'accounts:signout' as signout%}
+{% url 'accounts:profile' as profile%}
+
+{%if LANGUAGE_CODE == 'en' %}
+<div class="header">
+    <div class="logo"><a href=""><img src="{% static 'images/logo.gif' %}" alt="" border="0" /></a></div>
+    <div id="menu">
+      <ul>
+        <li {% if request.path == index %} class="selected" {% endif %} ><a href="{{index}}">home</a></li>
+        <li {% if request.path == about %} class="selected" {% endif %} ><a href="{{about}}">about us</a></li>
+        <li {% if request.path == all_products %} class="selected" {% endif %} ><a href="{{all_products}}">flowers</a></li>
+        <li {% if request.path == product_special %} class="selected" {% endif %}><a href="{{product_special}}">specials gifts</a></li>
+        {% if request.user.is_authenticated %}
+          <li {% if request.path == profile %} class="selected"{% endif %}><a href="{{profile}}">my accout</a></li>
+          <li {% if request.path == signout %} class="selected"{% endif %}><a href="{{signout}}">signout</a></li>
+        {% else %}
+          <li {% if request.path == signin %} class="selected"{% endif %}><a href="{{signin}}">signup/signin</a></li>
+        {% endif %}
+        <li {% if request.path == contact %} class="selected"{% endif %}><a href="{{contact}}">contact</a></li>
+      </ul>
+    </div>
+</div>
+{% endif %}
+{%if LANGUAGE_CODE == 'fa' %}
+<div class="header">
+    <div class="logo"><a href=""><img src="{% static 'images/logo.gif' %}" alt="" border="0" /></a></div>
+    <div id="menu">
+      <ul>
+        <li {% if request.path == index %} class="selected" {% endif %} ><a href="{{index}}">home</a></li>
+        <li {% if request.path == about %} class="selected" {% endif %} ><a href="{{about}}">about us</a></li>
+        <li {% if request.path == all_products %} class="selected" {% endif %} ><a href="{{all_products}}">flowers</a></li>
+        <li {% if request.path == product_special %} class="selected" {% endif %}><a href="{{product_special}}">specials gifts</a></li>
+        {% if request.user.is_authenticated %}
+          <li {% if request.path == profile %} class="selected"{% endif %}><a href="{{profile}}">my accout</a></li>
+          <li {% if request.path == signout %} class="selected"{% endif %}><a href="{{signout}}">signout</a></li>
+        {% else %}
+          <li {% if request.path == signin %} class="selected"{% endif %}><a href="{{signin}}">signup/signin</a></li>
+        {% endif %}<li {% if request.path == contact %} class="selected"{% endif %}><a href="{{contact}}">contact</a></li>
+      </ul>
+    </div>
+</div>
+{% endif %}

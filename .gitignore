@@ -1,0 +1,11 @@
+db.sqlite3
+sbenv/
+__pycache__/
+media/
+static
+*.sqlite3
+000*
+*.so
+*.py[cod]
+*.log
+*.pyc

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{%if LANGUAGE_CODE == 'en' %}
+
+  <div class="center_content">
+    <div class="left_content">
+      <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" /></span>Special gifts</div>
+      {% for pro in products %}
+        <div class="feat_prod_box">
+          <div class="prod_img"><a href="{% url 'product:product_single' pro.slug %}"><img src="{{pro.image.url}}" alt="" border="0" /></a></div>
+          <div class="prod_det_box"> <span class="special_icon"><img src="{% static 'images/special_icon.gif' %}" alt="" /></span>
+            <div class="box_top"></div>
+            <div class="box_center">
+              <div class="prod_title">{{ pro.name_en }}</div>
+              <p class="details">{{ pro.description_en|truncatechars:150 }}</p>
+              <a href="{% url 'product:product_single' pro.slug %}" class="more">- more details -</a>
+              <div class="clear"></div>
+            </div>
+            <div class="box_bottom"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      {% endfor %}
+
+      {% if searchs.has_other_pages %}
+        <div class="pagination">
+          {% if searchs.has_previous %}
+          <a href="?page={{searchs.previous_page_number}}"><<</a>
+          {% else %}
+          <span class="disabled"><<</span>
+          {% endif %}
+          {% for i in product.paginator.page_range %} 
+            {% if searchs.number == i %}
+            <a>{{i}}</a>
+            {% else %}
+              <a href="?page={{i}}">{{i}}</a>
+            {% endif %}
+          {% endfor %}
+          {% if searchs.has_next %}
+            <a href="?page={{searchs.next_page_number}}">>></a>
+          {% else %}
+          <span class="disabled">>></span>
+          {% endif %}
+        </div>
+      {% endif %}      
+      <div class="clear"></div>
+    </div>
+
+{% endif %}
+{%if LANGUAGE_CODE == 'fa' %}
+  
+  <div class="center_content">
+    <div class="left_content">
+      <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" /></span>Special gifts</div>
+      {% for pro in products %}
+        <div class="feat_prod_box">
+          <div class="prod_img"><a href="{% url 'product:product_single' pro.slug %}"><img src="{{pro.image.url}}" alt="" border="0" /></a></div>
+          <div class="prod_det_box"> <span class="special_icon"><img src="{% static 'images/special_icon.gif' %}" alt="" /></span>
+            <div class="box_top"></div>
+            <div class="box_center">
+              <div class="prod_title">{{ pro.name }}</div>
+              <p class="details">{{ pro.description|truncatechars:150 }}</p>
+              <a href="{% url 'product:product_single' pro.slug %}" class="more">- more details -</a>
+              <div class="clear"></div>
+            </div>
+            <div class="box_bottom"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      {% endfor %}
+
+      {% if searchs.has_other_pages %}
+        <div class="pagination">
+          {% if searchs.has_previous %}
+          <a href="?page={{searchs.previous_page_number}}"><<</a>
+          {% else %}
+          <span class="disabled"><<</span>
+          {% endif %}
+          {% for i in product.paginator.page_range %} 
+            {% if searchs.number == i %}
+            <a>{{i}}</a>
+            {% else %}
+              <a href="?page={{i}}">{{i}}</a>
+            {% endif %}
+          {% endfor %}
+          {% if searchs.has_next %}
+            <a href="?page={{searchs.next_page_number}}">>></a>
+          {% else %}
+          <span class="disabled">>></span>
+          {% endif %}
+        </div>
+      {% endif %}      
+      <div class="clear"></div>
+    </div>
+
+{% endif %}
+
+{% endblock %}

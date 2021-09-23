@@ -1,0 +1,68 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{%if LANGUAGE_CODE == 'en' %}
+  <!--end of left content-->
+    <div class="right_content">
+      <div class="languages_box"> <span class="red">Languages:</span> <a href="" class="selected"><img src="{% static 'images/gb.gif' %}" alt="" border="0" /></a> <a href=""><img src="{% static 'images/fr.gif' %}" alt="" border="0" /></a> <a href=""><img src="{% static 'images/de.gif' %}" alt="" border="0" /></a> </div>
+      <div class="currency"> <span class="red">Currency: </span> <a href="">GBP</a> <a href="">EUR</a> <a href="" class="selected">USD</a> </div>
+      <div class="cart">
+        <div class="title"><span class="title_icon"><img src="{% static 'images/cart.gif' %}" alt="" /></span>My cart</div>
+        <div class="home_cart_content"> {{user_count}} x items | <span class="red">TOTAL: {{total_doller}}$</span> </div>
+        <a href="{% url 'product:cart' %}" class="view_cart">view cart</a> </div>
+      <div class="title"><span class="title_icon"><img src="{% static 'images/bullet3.gif' %}" alt="" /></span>About Our Shop</div>
+      <div class="about">
+        <p> <img src="{% static 'images/about.gif' %}" alt="" class="right" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
+      </div>
+      <div class="right_box">
+        <div class="title"><span class="title_icon"><img src="{% static 'images/bullet4.gif' %}" alt="" /></span>Promotions</div>
+        {% for pro in product_promo %}
+            <div class="new_prod_box"> <a href="">{{pro.name_en}}</a>
+              <div class="new_prod_bg"> <span class="new_icon"><img src="{% static 'images/promo_icon.gif' %}" alt="" /></span> <a href="{% url 'product:product_single' pro.slug %}"><img src="{{ pro.image.url }}" alt="" class="thumb" border="0" /></a> </div>
+            </div>
+       {% endfor %}
+      </div>
+      <div class="right_box">
+        <div class="title"><span class="title_icon"><img src="{% static 'images/bullet5.gif' %}" alt="" /></span>Categories</div>
+        <ul class="list">
+            {% for cat in categories %}         
+                <li><a href="{% url 'product:category' cat.name_en %}">{{ cat.name_en }}</a></li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div>
+{% endif %}
+
+
+{%if LANGUAGE_CODE == 'fa' %}
+<!--end of left content-->
+    <div class="right_content">
+      <div class="languages_box"> <span class="red">Languages:</span> <a href="" class="selected"><img src="{% static 'images/gb.gif' %}" alt="" border="0" /></a> <a href=""><img src="{% static 'images/fr.gif' %}" alt="" border="0" /></a> <a href=""><img src="{% static 'images/de.gif' %}" alt="" border="0" /></a> </div>
+      <div class="currency"> <span class="red">Currency: </span> <a href="">GBP</a> <a href="">EUR</a> <a href="" class="selected">USD</a> </div>
+      <div class="cart">
+        <div class="title"><span class="title_icon"><img src="{% static 'images/cart.gif' %}" alt="" /></span>My cart</div>
+        <div class="home_cart_content"> {{user_count}} x items | <span class="red">TOTAL: {{total_rial}}$</span> </div>
+        <a href="{% url 'product:cart' %}" class="view_cart">view cart</a> </div>
+      <div class="title"><span class="title_icon"><img src="{% static 'images/bullet3.gif' %}" alt="" /></span>About Our Shop</div>
+      <div class="about">
+        <p> <img src="{% static 'images/about.gif' %}" alt="" class="right" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
+      </div>
+      <div class="right_box">
+        <div class="title"><span class="title_icon"><img src="{% static 'images/bullet4.gif' %}" alt="" /></span>Promotions</div>
+        {% for pro in product_promo %}
+        <div class="new_prod_box"> <a href="">{{pro.name}}</a>
+          <div class="new_prod_bg"> <span class="new_icon"><img src="{% static 'images/promo_icon.gif' %}" alt="" /></span> <a href="{% url 'product:product_single' pro.slug %}"><img src="{{ pro.image.url }}" alt="" class="thumb" border="0" /></a> </div>
+        </div>
+       {% endfor %}
+      </div>
+      <div class="right_box">
+        <div class="title"><span class="title_icon"><img src="{% static 'images/bullet5.gif' %}" alt="" /></span>Categories</div>
+        <ul class="list">
+            {% for cat in categories %}         
+                <li><a href="{% url 'product:category' cat.name_en %}">{{ cat.name }}</a></li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div>
+{% endif %}

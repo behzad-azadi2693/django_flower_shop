@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{%if LANGUAGE_CODE == 'en' %}
+  <div class="center_content">
+    <div class="left_content">
+      <div class="title"><span class="title_icon"><img src="{% static 'images/bullet1.gif' %}" alt="" /></span>{{product.name_en}}</div>
+      <div class="feat_prod_box_details">
+        <div class="prod_img"><a href=""><img src="{{product.image.url}}" alt="" border="0" /></a> <br />
+          <br />
+          <a href="{{ product.image.url }}" rel="lightbox"><img src="{% static 'images/zoom.gif' %}" alt="" border="0" /></a> </div>
+        <div class="prod_det_box">
+          <div class="box_top"></div>
+          <div class="box_center">
+            <div class="prod_title">Details</div>
+            <p class="details">{{product.description_en|truncatechars:200}}<br /></p>
+            <div class="price"><strong>PRICE:</strong> <span class="red">{{product.price_end_doller}} $</span></div>
+            <div class="price"><strong>COLORS:</strong> <span class="colors"><img src="images/color1.gif" alt="" border="0" /></span> <span class="colors"><img src="images/color2.gif" alt="" border="0" /></span> <span class="colors"><img src="images/color3.gif" alt="" border="0" /></span> </div>
+            {%if product.count > 0 %}
+              <a href="{% url 'product:add_to_basket' product.pk %}" class="more"><img src="{% static 'images/order_now.gif' %}" alt="" border="0" /></a>
+            {% endif %}
+            <div class="clear"></div>
+          </div>
+          <div class="box_bottom"></div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div id="demo" class="demolayout">
+        <ul id="demo-nav" class="demolayout">
+          <li><a class="active" href="#tab1">More details</a></li>
+          <li><a class="" href="#tab2">Related Products</a></li>
+        </ul>
+        <div class="tabs-container">
+          <div style="display: block;" class="tab" id="tab1">
+            <p class="more_details">{{product.description_en}}</p>
+          </div>
+          <div style="display: none;" class="tab" id="tab2">
+            {% for pro in products %}
+              <div class="new_prod_box"> <a href="{% url 'product:product_single' pro.slug %}">{{pro.name_en}}</a>
+                <div class="new_prod_bg"> <a href="{% url 'product:product_single' pro.slug %}"><img src="{{pro.image.url}}" alt="" class="thumb" border="0" /></a> </div>
+              </div>
+            {% endfor %}
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    
+{% endif %}
+{%if LANGUAGE_CODE == 'fa' %}
+    <div class="center_content">
+    <div class="left_content">
+      <div class="title"><span class="title_icon"><img src="{% static 'images/bullet1.gif' %}" alt="" /></span>{{product.name}}</div>
+      <div class="feat_prod_box_details">
+        <div class="prod_img"><a href=""><img src="{{product.image.url}}" alt="" border="0" /></a> <br />
+          <br />
+          <a href="{{ product.image.url }}" rel="lightbox"><img src="{% static 'images/zoom.gif' %}" alt="" border="0" /></a> </div>
+        <div class="prod_det_box">
+          <div class="box_top"></div>
+          <div class="box_center">
+            <div class="prod_title">Details</div>
+            <p class="details">{{product.description|truncatechars:200}}<br /></p>
+            <div class="price"><strong>PRICE:</strong> <span class="red">{{product.price_end_rial}} $</span></div>
+            <div class="price"><strong>COLORS:</strong> <span class="colors"><img src="images/color1.gif" alt="" border="0" /></span> <span class="colors"><img src="images/color2.gif" alt="" border="0" /></span> <span class="colors"><img src="images/color3.gif" alt="" border="0" /></span> </div>
+            <a href="{% url 'product:add_to_basket' product.pk %}" class="more"><img src="{% static 'images/order_now.gif' %}" alt="" border="0" /></a>
+            <div class="clear"></div>
+          </div>
+          <div class="box_bottom"></div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div id="demo" class="demolayout">
+        <ul id="demo-nav" class="demolayout">
+          <li><a class="active" href="#tab1">More details</a></li>
+          <li><a class="" href="#tab2">Related Products</a></li>
+        </ul>
+        <div class="tabs-container">
+          <div style="display: block;" class="tab" id="tab1">
+            <p class="more_details">{{product.description}}</p>
+          </div>
+          <div style="display: none;" class="tab" id="tab2">
+            {% for pro in products %}
+              <div class="new_prod_box"> <a href="{% url 'product:product_single' pro.slug %}">{{pro.name}}</a>
+                <div class="new_prod_bg"> <a href="{% url 'product:product_single' pro.slug %}"><img src="{{pro.image.url}}" alt="" class="thumb" border="0" /></a> </div>
+              </div>
+            {% endfor %}
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    
+{% endif %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+var tabber1 = new Yetii({
+id: 'demo'
+});
+
+</script>
+{% endblock %}
+
