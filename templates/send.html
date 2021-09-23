@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+<div class="center_content">
+    <div class="left_content">
+    {% if send %}
+        {% for ord in order %}
+          <a href="{% url 'product:show_order' ord.pk %}">
+            <p>username:<strong><span class="red">{{ord.user.username}}</span></strong>---email:<strong><span class="red">{{ord.user.email}}</span></strong></p>
+          </a>
+        {% endfor %}
+    {% endif %}
+    {% if show %}
+        {% for pro in products %}
+            <div class="new_prod_box"> <a href="{% url 'product:product_single' pro.product.slug %}">{{ pro.product.name }}--تعداد:<strong><span class="red">{{pro.qty}}</span></strong></a>
+            <a href="{% url 'product:product_single' pro.product.slug %}"><img src="{{ pro.product.image.url }}" alt="" class="thumb" border="0" /></a> </div>
+        {% endfor %}
+        <div class="new_products">
+            <hr>
+            <p>تلفن:{{ address.number }}</p>
+            <p>آدرس:{{ address.address }}</p>
+            <p> <a href="{% url 'product:is_send' basket.pk %}"> ارسال شده</a></P>
+        </div>
+    {% endif %}
+      <div class="clear"></div>
+    </div>
+{% endblock %}

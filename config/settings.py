@@ -118,7 +118,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'en'
-
+LANGUAGES = (
+    ('fa', 'Persian'),
+    ('en', 'English'),
+)
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -127,10 +130,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGES = (
-    ('fa', 'persian'),
-    ('en', 'English'),
-)
+
 LOCALE_PATHS = ( os.path.join(BASE_DIR, 'locale'), )
 
 # Static files (CSS, JavaScript, Images)
@@ -149,13 +149,11 @@ MEDIA_ROOT = 'media'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 AUTHENTICATION_BACKEND = (
     'movie.authentiacte.UserLoginBackend',
 )
-CONTEXT_PROCESSORS  = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.request'
-)
+
 
 AUTH_USER_MODEL = 'accounts.User'
 

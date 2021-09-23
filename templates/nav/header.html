@@ -10,10 +10,12 @@
 {% url 'accounts:signin' as signin%}
 {% url 'accounts:signout' as signout%}
 {% url 'accounts:profile' as profile%}
+{% url 'product:is_sending' as order%}
 
 {%if LANGUAGE_CODE == 'en' %}
 <div class="header">
     <div class="logo"><a href=""><img src="{% static 'images/logo.gif' %}" alt="" border="0" /></a></div>
+
     <div id="menu">
       <ul>
         <li {% if request.path == index %} class="selected" {% endif %} ><a href="{{index}}">home</a></li>
@@ -26,7 +28,10 @@
         {% else %}
           <li {% if request.path == signin %} class="selected"{% endif %}><a href="{{signin}}">signup/signin</a></li>
         {% endif %}
-        <li {% if request.path == contact %} class="selected"{% endif %}><a href="{{contact}}">contact</a></li>
+          <li {% if request.path == contact %} class="selected"{% endif %}><a href="{{contact}}">contact</a></li>
+        {% if request.user.is_authenticated and  request.user.is_admin%}
+          <li {% if request.path == order %} class="selected"{% endif %}><a href="{{order}}">order</a></li>
+        {% endif %}
       </ul>
     </div>
 </div>

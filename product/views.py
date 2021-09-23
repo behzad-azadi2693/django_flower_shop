@@ -308,3 +308,44 @@ def address(request, pk):
         form = AddresForm()
         return render(request, 'contact.html',{'form':form})
         
+
+@login_required
+def is_sending(request):
+    if not request.user.is_admin:
+        return redirect('product:index')
+    
+    order = Basket.objects.filter(is_paid=True, is_send_to_user=False)
+    context = {
+        'order':order,
+        'send':True    
+    }
+    return render(request, 'send.html', context)
+
+
+@login_required
+def show_order(request, pk):
+    if not request.user.is_admin:
+        return redirect('product:index')
+    
+    basket = get_object_or_404(Basket, pk=pk, is_paid=True, is_send_to_user=False)
+
+    products = basket.basketproduct_user.all()
+    address = get_object_or_404(Address,basket = basket)
+    context={
+        'products':products,
+        'address':address,
+        'basket':basket,
+        'show':True
+    }
+    return render(request, 'send.html', context)
+
+
+@login_required
+def is_send(request, pk):
+    if not request.user.is_admin:
+        return redirect('product:index')
+    
+    obj = get_object_or_404(Basket, pk=pk, is_paid=True, is_send_to_user=False)
+    obj.is_send_to_user = True
+    obj.save()
+    return redirect('product:is_sending')

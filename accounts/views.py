@@ -8,6 +8,8 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
+from django.utils import translation
+
 
 def signup(request):
     if request.user.is_authenticated:
@@ -80,3 +82,18 @@ def profile(request):
 def signout(request):
     logout(request)
     return redirect('accounts:signin')
+
+
+from django.utils.translation import LANGUAGE_SESSION_KEY
+from django.conf import settings
+from django.http import HttpResponse
+from django.utils import translation
+
+def change_language(request, name):
+                   
+    user_language = name
+    translation.activate(user_language)
+    request.session[translation.LANGUAGE_SESSION_KEY] = user_language
+    response = HttpResponse(...)
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+    return redirect('product:index')
