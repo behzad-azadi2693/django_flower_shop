@@ -67,14 +67,14 @@ class RegisterForm(forms.Form):
     def clean_username(self):
         cd = self.cleaned_data['username']
         user = User.objects.filter(username = cd).first()
-        if cd.exists:
+        if user:
             raise forms.ValidationError(_('this username is exits'))
         return cd
 
     def clean_email(self):
         cd = self.cleaned_data['email']
         user = User.objects.filter(email = cd).first()
-        if user.exists:
+        if user:
             raise forms.ValidationError(_('this email is exists'))
         return cd
 
@@ -106,3 +106,15 @@ class LoginForm(forms.Form):
         if username == '' and email == '':
             raise forms.ValidationError(_('please enter email or username'))
         return email
+
+
+class UpdatePasswordForm(forms.Form): 
+    password = forms.CharField(label=_('password'), widget=forms.PasswordInput,min_length=4)
+    password_confierm = forms.CharField(label=_('password_confierm'), widget=forms.PasswordInput, min_length=4)
+
+    def clean_password_confierm(self):
+        cd = self.cleaned_data
+        if cd['password'] and cd['password_confierm'] and cd['password'] != cd['password_confierm']:
+            raise forms.ValidationError(_("password and confirm password must be match "))
+        
+        return cd['password_confierm']
