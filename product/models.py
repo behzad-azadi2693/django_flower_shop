@@ -88,7 +88,7 @@ class Product(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('product:single_product', args=(self.slug,))
+        return reverse('product:product_single', args=(self.slug,))
 
     def delete(self, *args, **kwargs):
         self.image.delete()

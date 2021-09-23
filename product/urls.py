@@ -1,4 +1,6 @@
 from django.urls import path
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import ProductSitemap
 from .views import (
                 index, is_sending,product_single,delete_product,
                 categories,about,all_products,contact_us,
@@ -6,6 +8,10 @@ from .views import (
                 update_basket,remove_basket,pay,address,
                 is_sending,show_order,is_send
 )
+
+sitemaps = {
+    'movie':ProductSitemap,
+}
 
 app_name = 'product'
 
@@ -28,4 +34,6 @@ urlpatterns = [
     path('is_sending/', is_sending, name='is_sending'),
     path('show_order/<int:pk>/', show_order, name='show_order'),
     path('is_send/<int:pk>/', is_send, name='is_send'),
+    path('sitemap/', sitemap, {'sitemaps':sitemaps}, name="sitemap"),
+
 ]
