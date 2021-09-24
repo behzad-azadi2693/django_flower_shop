@@ -175,5 +175,5 @@ else:
 
 AUTH_USER_MODEL = 'accounts.User'
 
-LOGIN_URL = 'accounts:sigin'
+LOGIN_URL = 'accounts:signin'
 LOGOUT_URL = 'accounts:signout'
