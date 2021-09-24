@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.db.models import fields
 from django.forms.forms import Form
+from django.forms.models import ModelForm
 from .models import User
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
@@ -106,6 +107,23 @@ class LoginForm(forms.Form):
         if username == '' and email == '':
             raise forms.ValidationError(_('please enter email or username'))
         return email
+
+
+class EmailForm(forms.Form):
+    email = forms.EmailField(label=_('email'), widget=forms.EmailInput,required=False)
+    def __init__(self, *args, **kwargs):
+        super(EmailForm, self).__init__(*args, **kwargs)
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'contact_input'
+            self.fields[field].error_messages = messages
+
+    def clean_email(self):
+        cd = self.cleaned_data['email']
+        user = User.objects.filter(email = cd).first()
+        if not user:
+            raise forms.ValidationError(_('this email is not exists'))
+        return cd
 
 
 class UpdatePasswordForm(forms.Form): 

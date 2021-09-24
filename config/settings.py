@@ -157,6 +157,21 @@ AUTHENTICATION_BACKEND = (
     'movie.authentiacte.UserLoginBackend',
 )
 
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'youremail@gmail.com'
+    EMAIL_HOST_PASSWORD = 'email_password'
+    EMAIL_PORT = 587
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'youremail@gmail.com'
+    EMAIL_HOST_PASSWORD = 'email_password'
+    EMAIL_PORT = 587
+
 
 AUTH_USER_MODEL = 'accounts.User'
 

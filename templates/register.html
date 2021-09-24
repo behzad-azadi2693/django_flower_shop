@@ -11,6 +11,9 @@
           <p class="details"> {% trans 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.'%} </p>
           <div class="contact_form">
             <div class="form_subtitle">{% trans "user identify" %}</div>
+            {% if login %}
+              <li><a href="{% url 'accounts:recovery' %}">forget password</a></li>
+            {% endif %}
             <form name="register"  action="" method='POST' novalidate>
             {% csrf_token %}
               {% for field in form %}  
