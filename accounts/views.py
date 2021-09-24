@@ -16,28 +16,28 @@ def signup(request):
         return redirect('accounts:signout')
 
     if request.method == 'POST':
-        form_create = RegisterForm(request.POST)
-        if form_create.is_valid():
-            cd = form_create.cleaned_data
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
             get_user_model().objects.create_user(username = cd['username'], email=cd['email'], password = cd['password'])
             messages.success(request,_('your submited is successfully'),success)
             return redirect('acounts:sigin')
         else:
-            form_create = RegisterForm(request.POST)
+            form = RegisterForm(request.POST)
             messages.warning(request, _('please check fields'),'warning')
-            return render(request, 'register.html',{'form_create':form_create})
+            return render(request, 'register.html',{'form':form})
     else:
-        form_create = RegisterForm()
-        return render(request, 'register.html', {'form_create':form_create})
+        form = RegisterForm()
+        return render(request, 'register.html', {'form':form})
 
 def signin(request):
     if request.user.is_authenticated:
         return redirect('accounts:logout')
 
     if request.method == 'POST':
-        form_login = LoginForm(request.POST)
-        if form_login.is_valid():
-            cd = form_login.cleaned_data
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
             if cd['username']:
                 user = get_user_model().objects.filter(username = cd['username']).first()
                 if not user:
@@ -56,12 +56,12 @@ def signin(request):
             return redirect('product:index')
 
         else:
-            form_login = LoginForm(request.POST)
+            form = LoginForm(request.POST)
             messages.warning(request, _('please check fields'),'warning')
-            return render(request, 'register.html', {'form_login':form_login})
+            return render(request, 'register.html', {'form':form})
     else:
-        form_login = LoginForm()
-        return render(request, 'register.html', {'form_login':form_login})
+        form = LoginForm()
+        return render(request, 'register.html', {'form':form})
 
 
 @login_required

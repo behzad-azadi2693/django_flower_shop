@@ -357,18 +357,18 @@ def create(request):
         return redirect('product:index')
 
     if request.method == 'POST':
-        form_create = CreateForm(request.POST, request.FILES)
-        if form_create.is_valid():
-            obj = form_create.save()
+        form = CreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            obj = form.save()
             messages.success(request, _('product successfullly submit '), 'success')
             return redirect('produc:product_single', obj.slug)
         else:
-            form_create = CreateForm(request.POST, request.FILES)
+            form = CreateForm(request.POST, request.FILES)
             messages.warning(request,_('please check fields'),'warning')
-            return render(request,'register.html', {'form_create':form_create})
+            return render(request,'register.html', {'form':form})
     else:
-        form_create = CreateForm()
-        return render(request, 'register.html',{'form_create':form_create})
+        form = CreateForm()
+        return render(request, 'register.html',{'form':form})
 
 
 @login_required
@@ -385,10 +385,10 @@ def edit(request, pk):
             messages.success(request, _('editing successfull '),'success')
             return redirect('product:product_single', obj.slug)
         else:
-            form_create = CreateForm(request.POST, request.FILES, instance=data)
+            form = CreateForm(request.POST, request.FILES, instance=data)
             messages.warning(request, _('please check fields'),'warning')
-            return render(request, 'register.form',{'form_create':form_create})
+            return render(request, 'register.form',{'form':form})
 
     else:
-        form_create = CreateForm(instance=data)
-        return render(request, 'register.html',{'form_create':form_create})
+        form = CreateForm(instance=data)
+        return render(request, 'register.html',{'form':form})

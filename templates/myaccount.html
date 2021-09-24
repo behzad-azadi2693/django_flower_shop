@@ -1,24 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block body %}
 {% load i18n %}
 
-{% get_current_language as LANGUAGE_CODE %}
+{% block body %}
 
-{%if LANGUAGE_CODE == 'en' %}
   <div class="center_content">
     <div class="left_content">
       <div class="title"><span class="title_icon"><img src="{% static 'images/bullet1.gif' %}" alt="" /></span>My account</div>
       <div class="feat_prod_box_details">
-        <p class="details"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
+        <p class="details">{% trans  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud." %} </p>
         <div class="contact_form">
-          <p class="contact">username:<strong>{{request.user.username}}</strong></p>
-          <p class="contact">email:<strong>{{request.user.email}}</strong></p> 
+          <p class="contact">{% trans "username" %}:<strong>{{request.user.username}}</strong></p>
+          <p class="contact">{% trans "email"%}:<strong>{{request.user.email}}</strong></p> 
           {% if request.user.is_authenticated and  request.user.is_admin%}
             <li><a href="{% url 'product:create' %}">create</a></li>
           {% endif %}
           <hr>
-          <div class="form_subtitle">your account</div>
+          <div class="form_subtitle">{% trans "your account"%}</div>
           <form name="register" action="" method="POST" novalidate>
             {% csrf_token %}
             {% for field in form %}
@@ -29,44 +27,11 @@
             </div>
             {% endfor %}
             <div class="form_row">
-              <input type="submit" class="register" value="update" />
+              <input type="submit" class="register" value="{% trans 'update'%}" />
             </div>
           </form>
         </div>
       </div>
       <div class="clear"></div>
     </div>
-{% endif %}
-{%if LANGUAGE_CODE == 'fa' %}
- <div class="center_content">
-    <div class="left_content">
-      <div class="title"><span class="title_icon"><img src="{% static 'images/bullet1.gif' %}" alt="" /></span>My account</div>
-      <div class="feat_prod_box_details">
-        <p class="details"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
-        <div class="contact_form">
-          <p class="contact">username:<strong>{{request.user.username}}</strong></p>
-          <p class="contact">email:<strong>{{request.user.email}}</strong></p> 
-          {% if request.user.is_authenticated and  request.user.is_admin%}
-            <li><a href="{% url 'product:create' %}">create</a></li>
-          {% endif %}
-          <hr>
-          <div class="form_subtitle">your account</div>
-          <form name="register" action="" method="POST" novalidate>
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="form_row">
-              <label class="contact"><strong>{{ field.label }}:</strong></label> <br>
-              {{field}}
-              <p style="color:tomato">{{ field.errors }}</p>
-            </div>
-            {% endfor %}
-            <div class="form_row">
-              <input type="submit" class="register" value="update" />
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="clear"></div>
-    </div>
-{% endif %}
 {% endblock %}
