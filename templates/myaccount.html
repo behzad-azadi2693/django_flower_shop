@@ -13,7 +13,11 @@
         <p class="details"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
         <div class="contact_form">
           <p class="contact">username:<strong>{{request.user.username}}</strong></p>
-          <p class="contact">email:<strong>{{request.user.email}}</strong></p> <hr>
+          <p class="contact">email:<strong>{{request.user.email}}</strong></p> 
+          {% if request.user.is_authenticated and  request.user.is_admin%}
+            <li><a href="{% url 'product:create' %}">create</a></li>
+          {% endif %}
+          <hr>
           <div class="form_subtitle">your account</div>
           <form name="register" action="" method="POST" novalidate>
             {% csrf_token %}
@@ -41,7 +45,11 @@
         <p class="details"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
         <div class="contact_form">
           <p class="contact">username:<strong>{{request.user.username}}</strong></p>
-          <p class="contact">email:<strong>{{request.user.email}}</strong></p> <hr>
+          <p class="contact">email:<strong>{{request.user.email}}</strong></p> 
+          {% if request.user.is_authenticated and  request.user.is_admin%}
+            <li><a href="{% url 'product:create' %}">create</a></li>
+          {% endif %}
+          <hr>
           <div class="form_subtitle">your account</div>
           <form name="register" action="" method="POST" novalidate>
             {% csrf_token %}

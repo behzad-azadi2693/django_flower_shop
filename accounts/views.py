@@ -24,6 +24,7 @@ def signup(request):
             return redirect('acounts:sigin')
         else:
             form_create = RegisterForm(request.POST)
+            messages.warning(request, _('please check fields'),'warning')
             return render(request, 'register.html',{'form_create':form_create})
     else:
         form_create = RegisterForm()
@@ -51,10 +52,12 @@ def signin(request):
 
             user_auth = authenticate(username = user.username, password = cd['password'])
             login(request,user_auth)
+            messages.success(request, _('your login to site successfull'),'success')
             return redirect('product:index')
 
         else:
             form_login = LoginForm(request.POST)
+            messages.warning(request, _('please check fields'),'warning')
             return render(request, 'register.html', {'form_login':form_login})
     else:
         form_login = LoginForm()
@@ -81,6 +84,7 @@ def profile(request):
 @login_required
 def signout(request):
     logout(request)
+    messages.success(request,_('your logout successfull'), 'success')
     return redirect('accounts:signin')
 
 

@@ -6,7 +6,7 @@ from .views import (
                 categories,about,all_products,contact_us,
                 search, cart,add_to_basket,product_special,
                 update_basket,remove_basket,pay,address,
-                is_sending,show_order,is_send
+                is_sending,show_order,is_send,create,edit
 )
 
 sitemaps = {
@@ -34,6 +34,8 @@ urlpatterns = [
     path('is_sending/', is_sending, name='is_sending'),
     path('show_order/<int:pk>/', show_order, name='show_order'),
     path('is_send/<int:pk>/', is_send, name='is_send'),
+    path('edit/<int:pk>/', edit, name='edit'),
+    path('create/', create, name='create'),
     path('sitemap/', sitemap, {'sitemaps':sitemaps}, name="sitemap"),
 
 ]

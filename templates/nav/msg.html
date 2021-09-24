@@ -1,0 +1,7 @@
+{% if messages %}
+    {% for msg in messages %}
+        <div class="row">
+            <h1 style="background:orange; color:slategrey; text-align: center;" class="col-md-4 alert alert-{{ msg.tags }}">{{ msg }}</h1>
+        </div>    
+    {% endfor %}
+{% endif %}

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import ContactForm, AddresForm
+from .forms import ContactForm, AddresForm, CreateForm
 from django.utils.translation import gettext_lazy as _
 
 
@@ -349,3 +349,46 @@ def is_send(request, pk):
     obj.is_send_to_user = True
     obj.save()
     return redirect('product:is_sending')
+
+
+@login_required
+def create(request):
+    if not request.user.is_admin:
+        return redirect('product:index')
+
+    if request.method == 'POST':
+        form_create = CreateForm(request.POST, request.FILES)
+        if form_create.is_valid():
+            obj = form_create.save()
+            messages.success(request, _('product successfullly submit '), 'success')
+            return redirect('produc:product_single', obj.slug)
+        else:
+            form_create = CreateForm(request.POST, request.FILES)
+            messages.warning(request,_('please check fields'),'warning')
+            return render(request,'register.html', {'form_create':form_create})
+    else:
+        form_create = CreateForm()
+        return render(request, 'register.html',{'form_create':form_create})
+
+
+@login_required
+def edit(request, pk):
+    if not request.user.is_admin:
+        return redirect('product:index')
+
+    data = get_object_or_404(Product, pk=pk)
+
+    if request.method == 'POST':
+        form = CreateForm(request.POST, request.FILES, instance=data)
+        if form.is_valid():
+            obj = form.save()
+            messages.success(request, _('editing successfull '),'success')
+            return redirect('product:product_single', obj.slug)
+        else:
+            form_create = CreateForm(request.POST, request.FILES, instance=data)
+            messages.warning(request, _('please check fields'),'warning')
+            return render(request, 'register.form',{'form_create':form_create})
+
+    else:
+        form_create = CreateForm(instance=data)
+        return render(request, 'register.html',{'form_create':form_create})

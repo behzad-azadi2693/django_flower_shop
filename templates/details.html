@@ -21,6 +21,9 @@
             <p class="details">{{product.description_en|truncatechars:200}}<br /></p>
             <div class="price"><strong>PRICE:</strong> <span class="red">{{product.price_end_doller}} $</span></div>
             <div class="price"><strong>COLORS:</strong> <span class="colors"><img src="images/color1.gif" alt="" border="0" /></span> <span class="colors"><img src="images/color2.gif" alt="" border="0" /></span> <span class="colors"><img src="images/color3.gif" alt="" border="0" /></span> </div>
+            {% if request.user.is_authenticated and  request.user.is_admin%}
+              <li><a href="{% url 'product:edit' product.pk %}">edit</a></li>
+            {% endif %}
             {%if product.count > 0 %}
               <a href="{% url 'product:add_to_basket' product.pk %}" class="more"><img src="{% static 'images/order_now.gif' %}" alt="" border="0" /></a>
             {% endif %}
@@ -68,6 +71,9 @@
             <p class="details">{{product.description|truncatechars:200}}<br /></p>
             <div class="price"><strong>PRICE:</strong> <span class="red">{{product.price_end_rial}} $</span></div>
             <div class="price"><strong>COLORS:</strong> <span class="colors"><img src="images/color1.gif" alt="" border="0" /></span> <span class="colors"><img src="images/color2.gif" alt="" border="0" /></span> <span class="colors"><img src="images/color3.gif" alt="" border="0" /></span> </div>
+            {% if request.user.is_authenticated and  request.user.is_admin%}
+              <li><a href="{% url 'product:edit' product.pk %}">edit</a></li>
+            {% endif %}
             <a href="{% url 'product:add_to_basket' product.pk %}" class="more"><img src="{% static 'images/order_now.gif' %}" alt="" border="0" /></a>
             <div class="clear"></div>
           </div>
