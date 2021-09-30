@@ -26,7 +26,7 @@
       <div class="title"><span class="title_icon"><img src="images/bullet1.gif" alt="" /></span>all products</div>
       <div class="new_products">
        
-      {% for pro in products %}
+      {% for pro in searchs %}
         <div class="new_prod_box"> <a href="{% url 'product:product_single' pro.slug %}">{{ pro.name_en }}</a>
           <div class="new_prod_bg"> <span class="new_icon">
           {% if pro.status == 'new' %}
