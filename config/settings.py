@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 if DEBUG:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1','*']
 
     DATABASES = {
         'default': {
@@ -86,7 +86,7 @@ if DEBUG:
         }
     }
 else:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['flowershop.com', 'www.flowershop.com']
 
     DATABASES = {
         'default': {
