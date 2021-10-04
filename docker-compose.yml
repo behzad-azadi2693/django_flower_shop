@@ -22,7 +22,7 @@ services:
         build: .
         command: sh -c "python3 manage.py makemigrations && 
                         python3 manage.py migrate && 
-                        python3 manage.py collectstatic && 
+                        python3 manage.py collectstatic --no-input && 
                         python3 manage.py initadmin && 
                         gunicorn -k gevent flower.wsgi:application -b 0.0.0.0:8000"
         restart: on-failure
