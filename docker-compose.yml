@@ -57,8 +57,11 @@ services:
 
 networks: 
     main:
+        external: true
 
 volumes: 
     static:
+        external: true
     
     postgres_data:
+        external: true
