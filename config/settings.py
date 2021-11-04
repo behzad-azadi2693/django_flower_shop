@@ -154,7 +154,7 @@ MEDIA_ROOT = 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKEND = (
-    'movie.authentiacte.UserLoginBackend',
+    'accounts.authentiacte.UserLoginBackend',
 )
 
 if DEBUG:
