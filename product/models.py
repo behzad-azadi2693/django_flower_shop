@@ -52,7 +52,7 @@ class Doller(models.Model):
 
 
 def path_save_course(instance, filename):
-    name = '{0}/{1}/{2}'.format(instance.categoryto.name_en, instance.name_en, filename)
+    name = os.path.join(instance.categoryto.name_en, instance.name_en, filename)
     return name
 
 class Product(models.Model):
