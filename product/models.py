@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from accounts.models import User
 from django.db.models.fields import BooleanField, PositiveIntegerField
@@ -52,8 +53,8 @@ class Doller(models.Model):
 
 
 def path_save_course(instance, filename):
-    name = os.path.join(instance.categoryto.name_en, instance.name_en, filename)
-    return name
+    path_save = os.path.join(instance.categoryto.name_en, instance.name_en, filename)
+    return path_save
 
 class Product(models.Model):
     CHOICE_STATE = (
