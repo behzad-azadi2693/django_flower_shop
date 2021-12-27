@@ -41,16 +41,16 @@
     <div class="logo"><a href=""><img src="{% static 'images/logo.gif' %}" alt="" border="0" /></a></div>
     <div id="menu">
       <ul>
-        <li {% if request.path == index %} class="selected" {% endif %} ><a href="{{index}}">home</a></li>
-        <li {% if request.path == about %} class="selected" {% endif %} ><a href="{{about}}">about us</a></li>
-        <li {% if request.path == all_products %} class="selected" {% endif %} ><a href="{{all_products}}">flowers</a></li>
-        <li {% if request.path == product_special %} class="selected" {% endif %}><a href="{{product_special}}">specials gifts</a></li>
+        <li {% if request.path == index %} class="selected" {% endif %} ><a href="{{index}}">خانه</a></li>
+        <li {% if request.path == about %} class="selected" {% endif %} ><a href="{{about}}">درباره ما</a></li>
+        <li {% if request.path == all_products %} class="selected" {% endif %} ><a href="{{all_products}}">گل ها</a></li>
+        <li {% if request.path == product_special %} class="selected" {% endif %}><a href="{{product_special}}">سفارشات مخصوص</a></li>
         {% if request.user.is_authenticated %}
-          <li {% if request.path == profile %} class="selected"{% endif %}><a href="{{profile}}">my accout</a></li>
-          <li {% if request.path == signout %} class="selected"{% endif %}><a href="{{signout}}">signout</a></li>
+          <li {% if request.path == profile %} class="selected"{% endif %}><a href="{{profile}}">اکانت من</a></li>
+          <li {% if request.path == signout %} class="selected"{% endif %}><a href="{{signout}}">خروج</a></li>
         {% else %}
-          <li {% if request.path == signin %} class="selected"{% endif %}><a href="{{signin}}">signup/signin</a></li>
-        {% endif %}<li {% if request.path == contact %} class="selected"{% endif %}><a href="{{contact}}">contact</a></li>
+          <li {% if request.path == signin %} class="selected"{% endif %}><a href="{{signin}}">ورود/ثبت نام</a></li>
+        {% endif %}<li {% if request.path == contact %} class="selected"{% endif %}><a href="{{contact}}">ارتباط با ما</a></li>
       </ul>
     </div>
 </div>
