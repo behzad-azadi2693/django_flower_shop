@@ -18,13 +18,14 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from accounts.views import signin_email
+from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('', include('product.urls')),
     path('signin/email/<uidb64>/<token>/', signin_email, name='signin_email'),
-]
+)
 
 
 if settings.DEBUG:
