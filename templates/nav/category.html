@@ -7,7 +7,7 @@
     <div class="right_content">
 
       <div class="languages_box">
-      <span class="red">Languages:</span> <a href="{% url 'accounts:change_language' 'en' %}" class="selected"><img src="{% static 'images/gb.gif' %}" alt="" border="0" /></a> <a href="{% url 'accounts:change_language' 'fa' %}"><img src="{% static 'images/fr.gif' %}" alt="" border="0" /></a></div>
+      <span class="red">Languages:</span> <a href="{% url 'accounts:change_language' 'en' %}?next={{ request.get_full_path }}" class="selected"><img src="{% static 'images/gb.gif' %}" alt="" border="0" /></a> <a href="{% url 'accounts:change_language' 'fa' %}"><img src="{% static 'images/fr.gif' %}" alt="" border="0" /></a></div>
       
       <div class="cart">
         <div class="title"><span class="title_icon"><img src="{% static 'images/cart.gif' %}" alt="" /></span>My cart</div>
@@ -42,7 +42,7 @@
     <div class="right_content">
 
       <div class="languages_box">
-      <span class="red">Languages:</span> <a href="{% url 'accounts:change_language' 'en' %}" ><img src="{% static 'images/gb.gif' %}" alt="" border="0" /></a> <a href="{% url 'accounts:change_language' 'fa' %}" class="selected"><img src="{% static 'images/fr.gif' %}" alt="" border="0" /></a></div>
+      <span class="red">Languages:</span> <a href="{% url 'accounts:change_language' 'en' %}?next={{ request.get_full_path }}" ><img src="{% static 'images/gb.gif' %}" alt="" border="0" /></a> <a href="{% url 'accounts:change_language' 'fa' %}" class="selected"><img src="{% static 'images/fr.gif' %}" alt="" border="0" /></a></div>
       
       <div class="cart">
         <div class="title"><span class="title_icon"><img src="{% static 'images/cart.gif' %}" alt="" /></span>My cart</div>
