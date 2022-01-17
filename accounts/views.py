@@ -9,6 +9,7 @@ from django.utils import translation
 from .token import send_token, account_activation_token
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
+from django.conf import settings
 
 
 def signup(request):
@@ -135,8 +136,9 @@ from django.utils import translation
 def change_language(request, name):
                    
     user_language = name
-    translation.activate(user_language)
-    request.session[translation.LANGUAGE_SESSION_KEY] = user_language
-    response = HttpResponse(...)
-    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+    path = request.GET.get('next')
+    for language_cod, language_name in settings.LANGUAGES:
+        if language_cod in path:
+            translation.activate(lang)
+            return redirect(path.replace(language_cod, lang))
     return redirect('product:index')
