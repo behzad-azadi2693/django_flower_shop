@@ -1,13 +1,14 @@
 {% load static %}
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
+{% load i18n_urls %}
 
 {%if LANGUAGE_CODE == 'en' %}
   <!--end of left content-->
     <div class="right_content">
 
       <div class="languages_box">
-      <span class="red">Languages:</span> <a href="{% url 'accounts:change_language' 'en' %}?next={{ request.get_full_path }}" class="selected"><img src="{% static 'images/gb.gif' %}" alt="" border="0" /></a> <a href="{% url 'accounts:change_language' 'fa' %}"><img src="{% static 'images/fr.gif' %}" alt="" border="0" /></a></div>
+      <span class="red">Languages:</span> <a href="{% change_lang 'en' %}" class="selected"><img src="{% static 'images/gb.gif' %}" alt="" border="0" /></a> <a href="{% change_lang 'fa' %}"><img src="{% static 'images/fr.gif' %}" alt="" border="0" /></a></div>
       
       <div class="cart">
         <div class="title"><span class="title_icon"><img src="{% static 'images/cart.gif' %}" alt="" /></span>My cart</div>
