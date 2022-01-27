@@ -128,17 +128,3 @@ def signin_email(request, uidb64, token):
         return redirect('accounts:recovery')   
 
 
-from django.utils.translation import LANGUAGE_SESSION_KEY
-from django.conf import settings
-from django.http import HttpResponse
-from django.utils import translation
-
-def change_language(request, name):
-                   
-    user_language = name
-    path = request.GET.get('next')
-    for language_cod, language_name in settings.LANGUAGES:
-        if language_cod in path:
-            translation.activate(lang)
-            return redirect(path.replace(language_cod, lang))
-    return redirect('product:index')
