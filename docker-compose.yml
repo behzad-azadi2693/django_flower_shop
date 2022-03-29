@@ -62,6 +62,7 @@ networks:
 volumes: 
     static:
         external: true
-    
+    media:
+        external: true
     postgres_data:
         external: true
