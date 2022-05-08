@@ -22,7 +22,7 @@ services:
         restart: always
         user: postgres:postgres # Optional: see below
         volumes:
-            - ./data/bdckup:/backups
+            - ./data/backups:/backups
         links:
             - postgres
         depends_on:
